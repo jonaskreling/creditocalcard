@@ -1,16 +1,22 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+
+import { HttpErrorHandler } from './http-error-handler.service';
+import { MessageService } from './message.service';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ClienteComponent } from './cliente.component';
-import { ClientesComponent } from './clientes.component';
-import { CreditoComponent } from './credito.component';
-import { CreditosComponent } from './creditos.component';
-import { PagenotfoundComponent } from './pagenotfound.component';
+import { ClienteComponent } from './cliente/cliente.component';
+import { ClientesComponent } from './clientes/clientes.component';
+import { CreditoComponent } from './credito/credito.component';
+import { CreditosComponent } from './creditos/creditos.component';
+import { CidadeComponent } from './cidade/cidade.component';
+import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 
-import { HeaderComponent } from './header.component';
-import { FooterComponent } from './footer.component';
+import { HeaderComponent } from './header/header.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -21,13 +27,19 @@ import { FooterComponent } from './footer.component';
     CreditosComponent,
     PagenotfoundComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    CidadeComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [
+  	HttpErrorHandler,
+  	MessageService
+  ],
   bootstrap: [
   	AppComponent,
   	HeaderComponent,
