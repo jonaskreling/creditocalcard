@@ -3,6 +3,7 @@ package com.springbootdev.examples.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,16 +24,19 @@ public class DependenteController {
     @Autowired
     private DependenteRepository dependenteRepository;
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping("/dependentes")
     public Dependente create(@RequestBody Dependente dependente){
         return dependenteRepository.save(dependente);
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/dependentes")
     public List<Dependente> findAll(){
         return dependenteRepository.findAll();
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @PutMapping("/dependentes/{dependente_id}")
     public Dependente update(@PathVariable("dependente_id") Long dependenteId, @RequestBody Dependente dependenteObject){
     	Dependente dependente = dependenteRepository.findOne(dependenteId);
@@ -46,12 +50,14 @@ public class DependenteController {
     	return dependenteRepository.save(dependente);
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @DeleteMapping("/dependentes/{dependente_id}")
     public List<Dependente> delete(@PathVariable("dependente_id") Long dependenteId){
     	dependenteRepository.delete(dependenteId);
         return dependenteRepository.findAll();
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/dependentes/{dependente_id}")
     @ResponseBody
     public Dependente findByDependenteId(@PathVariable("dependente_id") Long dependenteId){

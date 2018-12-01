@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { DatePipe } from '@angular/common';
 
 import { HttpErrorHandler } from './http-error-handler.service';
 import { MessageService } from './message.service';
@@ -9,7 +10,7 @@ import { MessageService } from './message.service';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ClienteComponent } from './cliente/cliente.component';
-import { ClientesComponent } from './clientes/clientes.component';
+import { ClientesComponent } from './cliente/clientes.component';
 import { CreditoComponent } from './credito/credito.component';
 import { CreditosComponent } from './creditos/creditos.component';
 import { CidadeComponent } from './cidade/cidade.component';
@@ -38,7 +39,8 @@ import { FooterComponent } from './footer/footer.component';
   ],
   providers: [
   	HttpErrorHandler,
-  	MessageService
+  	MessageService,
+  	DatePipe
   ],
   bootstrap: [
   	AppComponent,

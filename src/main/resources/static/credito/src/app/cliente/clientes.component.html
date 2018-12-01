@@ -1,0 +1,107 @@
+<h5>Clientes</h5>
+<div class="row">
+	<div class="col">
+		<form class="form-inline">
+			<div class="form-group mb-2">
+				<label for="clienteLabel" class="sr-only">Cliente</label>
+				<input type="text" readonly class="form-control-plaintext text-right" id="clienteLabel" value="Cliente">
+			</div>
+			<div class="form-group mx-sm-3 mb-2">
+				<label for="cliente" class="sr-only">Cliente</label>
+				<input type="text" class="form-control" id="cliente" placeholder="Cliente" #clienteNome>
+			</div>
+			<button class="btn btn-primary mb-2" (click)="add(clienteNome.value); clienteNome.value=''">
+				Novo
+			</button>
+			<button class="btn btn-primary mb-2 ml-1" (click)="search(clienteNome.value)">
+				Buscar
+			</button>
+		</form>
+	</div>
+</div>
+<br />
+<div class="row">
+	<div class="col">
+		<table class="table">
+			<thead>
+				<tr>
+					<th scope="col">#</th>
+					<th scope="col">Cliente</th>
+					<th scope="col">Cpf</th>
+					<th scope="col">Idade</th>
+					<th scope="col">Sexo</th>
+					<th scope="col">Estado Civil</th>
+					<th scope="col">Status</th>
+					<th scope="col">Renda</th>
+					<th scope="col">Ações</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngFor="let cliente of clientes">
+					<th scope="row">
+						{{ cliente.id || 0 }}
+					</th>
+					<td *ngIf="cliente !== editCliente">
+						{{cliente.nome}}
+					</td>
+					<td *ngIf="cliente === editCliente">
+						<input [(ngModel)]="editCliente.nome" (blur)="update()" (keyup.enter)="update()" class="form-control" />
+					</td>
+					<td *ngIf="cliente !== editCliente">
+						{{cliente.cpf}}
+					</td>
+					<td *ngIf="cliente === editCliente">
+						<input [(ngModel)]="editCliente.cpf" (blur)="update()" (keyup.enter)="update()" class="form-control" type="text" />
+					</td>
+					<td *ngIf="cliente !== editCliente">
+						{{cliente.idade}}
+					</td>
+					<td *ngIf="cliente === editCliente">
+						<input [(ngModel)]="editCliente.idade" (blur)="update()" (keyup.enter)="update()" class="form-control" type="number" />
+					</td>
+					<td *ngIf="cliente !== editCliente">
+						{{cliente.sexo}}
+					</td>
+					<td *ngIf="cliente === editCliente">
+						<select [(ngModel)]="editCliente.sexo" (blur)="update()" (keyup.enter)="update()" class="form-control">
+							<option *ngFor="let sexo of listaSexo" [ngValue]="sexo.id">{{sexo.descricao}}</option>
+						</select>
+					</td>
+					<td *ngIf="cliente !== editCliente">
+						{{cliente.estadoCivil}}
+					</td>
+					<td *ngIf="cliente === editCliente">
+						<select [(ngModel)]="editCliente.estadoCivil" (blur)="update()" (keyup.enter)="update()" class="form-control">
+							<option *ngFor="let estadoCivil of listaEstadoCivil" [ngValue]="estadoCivil.id">{{estadoCivil.descricao}}</option>
+						</select>
+					</td>
+					<td *ngIf="cliente !== editCliente">
+						{{cliente.status}}
+					</td>
+					<td *ngIf="cliente === editCliente">
+						<select [(ngModel)]="editCliente.status" (blur)="update()" (keyup.enter)="update()" class="form-control">
+							<option *ngFor="let status of listaStatus" [ngValue]="status.id">{{status.descricao}}</option>
+						</select>
+					</td>
+					<td *ngIf="cliente !== editCliente">
+						{{cliente.renda}}
+					</td>
+					<td *ngIf="cliente === editCliente">
+						<input [(ngModel)]="editCliente.renda" (blur)="update()" (keyup.enter)="update()" class="form-control" type="number" />
+					</td>
+					<td>
+						<button title="Delete Cliente" (click)="cancel()" class="btn btn-danger ml-1" *ngIf="cliente.id === undefined">
+							Cancelar
+						</button>
+						<button title="Edit Cliente" (click)="edit(cliente)" class="btn btn-primary" *ngIf="cliente.id !== undefined"> 
+							Editar
+						</button>
+						<button title="Delete Cliente" (click)="delete(cliente)" class="btn btn-danger ml-1" *ngIf="cliente.id !== undefined">
+							Deletar
+						</button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>

@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { ClienteComponent } from './cliente/cliente.component';
-import { ClientesComponent } from './clientes/clientes.component';
+import { ClientesComponent } from './cliente/clientes.component';
 import { CreditoComponent } from './credito/credito.component';
 import { CreditosComponent } from './creditos/creditos.component';
 import { CidadeComponent } from './cidade/cidade.component';

@@ -3,6 +3,7 @@ package com.springbootdev.examples.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,16 +24,19 @@ public class EnderecoController {
     @Autowired
     private EnderecoRepository enderecoRepository;
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping("/enderecos")
     public Endereco create(@RequestBody Endereco endereco){
         return enderecoRepository.save(endereco);
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/enderecos")
     public List<Endereco> findAll(){
         return enderecoRepository.findAll();
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @PutMapping("/enderecos/{endereco_id}")
     public Endereco update(@PathVariable("endereco_id") Long enderecoId, @RequestBody Endereco enderecoObject){
     	Endereco endereco = enderecoRepository.findOne(enderecoId);
@@ -47,12 +51,14 @@ public class EnderecoController {
     	return enderecoRepository.save(endereco);
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @DeleteMapping("/enderecos/{endereco_id}")
     public List<Endereco> delete(@PathVariable("endereco_id") Long enderecoId){
     	enderecoRepository.delete(enderecoId);
         return enderecoRepository.findAll();
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/enderecos/{endereco_id}")
     @ResponseBody
     public Endereco findByEnderecoId(@PathVariable("endereco_id") Long enderecoId){
