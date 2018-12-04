@@ -99,7 +99,7 @@
 						</button>
 					</td>
 					<td class="text-center">
-						<button title="Análise de Crédito" (click)="delete(cliente)" class="btn btn-success ml-1 btn-sm" *ngIf="cliente.id !== undefined && cliente !== editCliente">
+						<button title="Análise de Crédito" (click)="abrirCredito(cliente, creditomodal)" class="btn btn-success ml-1 btn-sm" *ngIf="cliente.id !== undefined && cliente !== editCliente">
 							<i class="fa fa-credit-card"></i>
 						</button>
 						<button title="Cancelar Novo" (click)="cancel()" class="btn btn-danger ml-1 btn-sm" *ngIf="cliente.id === undefined">
@@ -320,98 +320,53 @@
 <ng-template #creditomodal let-modal>	
 	<div class="modal-header">
 		<h5 class="modal-title">Análise de Crédito</h5>
-		<button type="button" class="close" aria-label="Close" (click)="cancelDependente(modal)">
+		<button type="button" class="close" aria-label="Close" (click)="modal.close()">
 			<span aria-hidden="true">&times;</span>
 		</button>
 	</div>
 	<div class="modal-body">
+		<div class="row">
+			<div class="col text-center">
+				<button type="button" class="btn btn-success" (click)="novoCredito()">
+					Análise de Crédito
+				</button>
+			</div>
+		</div>
+		<br />
 		<table class="table">
 			<thead>
 				<tr>
 					<th scope="col">#</th>
 					<th scope="col">Nome</th>
-					<th scope="col" class="text-center">Cpf</th>
-					<th scope="col" class="text-center">Idade</th>
-					<th scope="col" class="text-center">Sexo</th>
-					<th scope="col" class="text-center">Estado Civil</th>
+					<th scope="col" class="text-center">Limite</th>
 					<th scope="col" class="text-center">Status</th>
-					<th scope="col" class="text-center">Ações</th>
+					<th scope="col" class="text-center">Motivo</th>
 				</tr>
 			</thead>
 			<tbody>
-				<tr *ngFor="let dependente of dependentes">
+				<tr *ngFor="let credito of creditos">
 					<th scope="row">
-						{{ dependente.id || 0 }}
+						{{ credito.id }}
 					</th>
-					<td *ngIf="dependente !== dependenteEdit">
-						{{dependente.nome}}
-					</td>
-					<td *ngIf="dependente === dependenteEdit">
-						<input [(ngModel)]="dependenteEdit.nome" (blur)="updateDependente()" (keyup.enter)="updateDependente()" class="form-control" />
-					</td>
-					<td *ngIf="dependente !== dependenteEdit" class="text-center">
-						{{dependente.cpf}}
-					</td>
-					<td *ngIf="dependente === dependenteEdit" class="text-center">
-						<input [(ngModel)]="dependenteEdit.cpf" (blur)="updateDependente()" (keyup.enter)="updateDependente()" class="form-control" type="text" />
-					</td>
-					<td *ngIf="dependente !== dependenteEdit" class="text-center">
-						{{dependente.idade}}
-					</td>
-					<td *ngIf="dependente === dependenteEdit" class="text-center">
-						<input [(ngModel)]="dependenteEdit.idade" (blur)="updateDependente()" (keyup.enter)="updateDependente()" class="form-control" type="number" />
-					</td>
-					<td *ngIf="dependente !== dependenteEdit" class="text-center">
-						{{dependente.sexo}}
-					</td>
-					<td *ngIf="dependente === dependenteEdit" class="text-center">
-						<select [(ngModel)]="dependenteEdit.sexo" (blur)="updateDependente()" (keyup.enter)="updateDependente()" class="form-control">
-							<option *ngFor="let sexo of listaSexo" [ngValue]="sexo.id">{{sexo.descricao}}</option>
-						</select>
-					</td>
-					<td *ngIf="dependente !== dependenteEdit" class="text-center">
-						{{dependente.estadoCivil}}
-					</td>
-					<td *ngIf="dependente === dependenteEdit" class="text-center">
-						<select [(ngModel)]="dependenteEdit.estadoCivil" (blur)="updateDependente()" (keyup.enter)="updateDependente()" class="form-control">
-							<option *ngFor="let estadoCivil of listaEstadoCivil" [ngValue]="estadoCivil.id">{{estadoCivil.descricao}}</option>
-						</select>
-					</td>
-					<td *ngIf="dependente !== dependenteEdit" class="text-center">
-						{{dependente.status}}
-					</td>
-					<td *ngIf="dependente === dependenteEdit" class="text-center">
-						<select [(ngModel)]="dependenteEdit.status" (blur)="updateDependente()" (keyup.enter)="updateDependente()" class="form-control">
-							<option *ngFor="let status of listaStatus" [ngValue]="status.id">{{status.descricao}}</option>
-						</select>
+					<td>
+						{{ credito.cliente.nome }}
 					</td>
 					<td class="text-center">
-						<button title="Cancelar Novo" (click)="cancelNovoDependente()" class="btn btn-danger ml-1 btn-sm" *ngIf="dependente.id === undefined">
-							<i class="fa fa-ban"></i>
-						</button>
-						<button title="Cancelar Edit" (click)="cancelEditDependente()" class="btn btn-danger ml-1 btn-sm" *ngIf="dependente.id !== undefined && dependente === dependenteEdit">
-							<i class="fa fa-ban"></i>
-						</button>
-						<button title="Editar Dependente" (click)="editDependente(dependente)" class="btn btn-primary ml-1 btn-sm" *ngIf="dependente.id !== undefined && dependente !== dependenteEdit"> 
-							<i class="fa fa-pencil"></i>
-						</button>
-						<button title="Deletar Dependente" (click)="deleteDependente(dependente)" class="btn btn-danger ml-1 btn-sm" *ngIf="dependente.id !== undefined && dependente !== dependenteEdit">
-							<i class="fa fa-trash"></i>
-						</button>
+						{{ credito.limite }}
+					</td>
+					<td class="text-center">
+						{{ credito.aprovado }}
+					</td>
+					<td class="text-center">
+						{{ credito.motivo }}
 					</td>
 				</tr>
 			</tbody>
 		</table>		
 	</div>
 	<div class="modal-footer">
-		<button type="button" class="btn btn-secondary" (click)="cancelDependente(modal)">
+		<button type="button" class="btn btn-secondary" (click)="modal.close()">
 			Fechar
-		</button>
-		<button type="button" class="btn btn-primary" (click)="novoDependente()" *ngIf="dependenteEdit === undefined">
-			Novo
-		</button>
-		<button type="button" class="btn btn-primary" (click)="saveDependente(dependenteEdit, modal)" *ngIf="dependenteEdit !== undefined">
-			Salvar
 		</button>
 	</div>
 </ng-template>

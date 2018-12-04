@@ -15,7 +15,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.springbootdev.prova.enumeration.Status;
+import com.springbootdev.prova.enumeration.Aprovado;
+import com.springbootdev.prova.enumeration.Motivo;
 
 @Entity
 @Table(name = "credito")
@@ -31,7 +32,11 @@ public class Credito {
     
     @Column(nullable = true)
     @Enumerated(EnumType.STRING)
-    private Status status;
+    private Aprovado aprovado;
+    
+    @Column(nullable = true)
+    @Enumerated(EnumType.STRING)
+    private Motivo motivo;
     
     @Column(nullable = true)
     private BigDecimal limite;
@@ -56,12 +61,12 @@ public class Credito {
 		this.cliente = cliente;
 	}
 
-	public Status getStatus() {
-		return status;
+	public Aprovado getAprovado() {
+		return aprovado;
 	}
 
-	public void setStatus(Status status) {
-		this.status = status;
+	public void setAprovado(Aprovado aprovado) {
+		this.aprovado = aprovado;
 	}
 
 	public BigDecimal getLimite() {
@@ -78,6 +83,14 @@ public class Credito {
 
 	public void setDateCreate(Date dateCreate) {
 		this.dateCreate = dateCreate;
+	}
+
+	public Motivo getMotivo() {
+		return motivo;
+	}
+
+	public void setMotivo(Motivo motivo) {
+		this.motivo = motivo;
 	}
 
 	@Override

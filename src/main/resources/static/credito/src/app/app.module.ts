@@ -10,10 +10,7 @@ import { MessageService } from './message.service';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ClienteComponent } from './cliente/cliente.component';
 import { ClientesComponent } from './cliente/clientes.component';
-import { CreditoComponent } from './credito/credito.component';
-import { CreditosComponent } from './creditos/creditos.component';
 import { CidadeComponent } from './cidade/cidade.component';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 
@@ -23,10 +20,7 @@ import { FooterComponent } from './footer/footer.component';
 @NgModule({
   declarations: [
     AppComponent,
-    ClienteComponent,
     ClientesComponent,
-    CreditoComponent,
-    CreditosComponent,
     PagenotfoundComponent,
     HeaderComponent,
     FooterComponent,

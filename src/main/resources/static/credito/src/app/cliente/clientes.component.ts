@@ -6,20 +6,28 @@ import { Cliente } from './cliente';
 import { Endereco } from '../endereco/endereco';
 import { Cidade } from '../cidade/cidade';
 import { Dependente } from '../dependente/dependente';
+import { Credito } from '../credito/credito';
 import { ClienteService } from './cliente.service';
 import { EnderecoService } from '../endereco/endereco.service';
 import { CidadeService } from '../cidade/cidade.service';
 import { DependenteService } from '../dependente/dependente.service';
+import { CreditoService } from '../credito/credito.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './clientes.component.html',
   styleUrls: ['./clientes.component.css'],
-  providers: [ ClienteService, EnderecoService, CidadeService, DependenteService, DatePipe  ]
+  providers: [ ClienteService, 
+  				EnderecoService, 
+  				CidadeService, 
+  				DependenteService,
+  				CreditoService, 
+  				DatePipe  ]
 })
 export class ClientesComponent implements OnInit {
 	clientes: Cliente[];
 	dependentes: Dependente[];
+	creditos: Credito[];
 	endereco: Endereco;
 	editCliente: Cliente;
 	clienteSelected: Cliente;
@@ -34,6 +42,7 @@ export class ClientesComponent implements OnInit {
 				private enderecoService: EnderecoService,
 				private cidadeService: CidadeService, 
 				private dependenteService: DependenteService,
+				private creditoService: CreditoService,
 				private datepipe: DatePipe,
 				private modalService: NgbModal) { }
 
@@ -152,6 +161,13 @@ export class ClientesComponent implements OnInit {
 				.subscribe(dependentes => this.dependentes = dependentes);
 	}
 	
+	abrirCredito(cliente, creditomodal): void {
+		this.clienteSelected = cliente;
+		this.modalService.open(creditomodal, { size: 'lg' });
+		this.creditoService.searchCreditos(cliente)
+				.subscribe(creditos => this.creditos = creditos);
+	}
+	
 	saveEndereco(endereco, modal): void {
 		let cep = (endereco.cep? endereco.cep.trim():undefined);
 		let rua = (endereco.rua? endereco.rua.trim(): undefined);
@@ -193,6 +209,17 @@ export class ClientesComponent implements OnInit {
 		}else{
 			this.dependentes.unshift(newDependente);
 		} 
+	}
+	
+	novoCredito(): void {
+		let cliente = this.clienteSelected;
+		let dateCreate = this.datepipe.transform(Date.now(), 'yyyy-MM-dd hh:mm:ss');
+		const newCredito: Credito = { cliente,dateCreate } as Credito;
+		this.creditoService.addCredito(newCredito)
+			.subscribe(credito => {
+				this.creditoService.searchCreditos(cliente)
+					.subscribe(creditos => this.creditos = creditos);
+			});
 	}
 
 	delete(cliente: Cliente): void {

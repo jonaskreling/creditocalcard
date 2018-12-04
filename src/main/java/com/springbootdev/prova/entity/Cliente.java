@@ -57,7 +57,7 @@ public class Cliente {
     private List<Dependente> dependentes;
     
     @JsonIgnore
-    @OneToMany(mappedBy = "credito")
+    @OneToMany(mappedBy = "cliente")
     private List<Credito> creditos;
     
     @Column(nullable = false)

@@ -10,11 +10,11 @@
 				<label for="cidade" class="sr-only">Cidade</label>
 				<input type="text" class="form-control" id="cidade" placeholder="Cidade" #cidadeNome>
 			</div>
-			<button class="btn btn-primary mb-2" (click)="add(cidadeNome.value); cidadeNome.value=''">
-				Salvar
+			<button class="btn btn-success mb-2" (click)="add(cidadeNome.value); cidadeNome.value=''">
+				<i class="fa fa-plus"></i>
 			</button>
 			<button class="btn btn-primary mb-2 ml-1" (click)="search(cidadeNome.value)">
-				Buscar
+				<i class="fa fa-search"></i>
 			</button>
 		</form>
 	</div>
@@ -42,11 +42,11 @@
 						<input [(ngModel)]="editCidade.nome" (blur)="update()" (keyup.enter)="update()" class="form-control" />
 					</td>
 					<td>
-						<button title="Edit Cidade" (click)="edit(cidade)" class="btn btn-primary"> 
-							Edit
+						<button title="Edit Cidade" (click)="edit(cidade)" class="btn btn-primary btn-sm"> 
+							<i class="fa fa-pencil"></i>
 						</button>
-						<button title="Delete Cidade" (click)="delete(cidade)" class="btn btn-danger ml-1">
-							Delete
+						<button title="Delete Cidade" (click)="delete(cidade)" class="btn btn-danger ml-1 btn-sm">
+							<i class="fa fa-trash"></i>
 						</button>
 					</td>
 				</tr>
