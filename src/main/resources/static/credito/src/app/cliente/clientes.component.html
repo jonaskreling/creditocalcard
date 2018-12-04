@@ -10,11 +10,11 @@
 				<label for="cliente" class="sr-only">Cliente</label>
 				<input type="text" class="form-control" id="cliente" placeholder="Cliente" #clienteNome>
 			</div>
-			<button class="btn btn-primary mb-2" (click)="add(clienteNome.value); clienteNome.value=''">
-				Novo
+			<button class="btn btn-success mb-2" (click)="add(clienteNome.value); clienteNome.value=''" title="Cadastrar Novo">
+				<i class="fa fa-plus"></i>
 			</button>
-			<button class="btn btn-primary mb-2 ml-1" (click)="search(clienteNome.value)">
-				Buscar
+			<button class="btn btn-primary mb-2 ml-1" (click)="search(clienteNome.value)" title="Buscar">
+				<i class="fa fa-search"></i>
 			</button>
 		</form>
 	</div>
@@ -27,13 +27,14 @@
 				<tr>
 					<th scope="col">#</th>
 					<th scope="col">Cliente</th>
-					<th scope="col">Cpf</th>
-					<th scope="col">Idade</th>
-					<th scope="col">Sexo</th>
-					<th scope="col">Estado Civil</th>
-					<th scope="col">Status</th>
-					<th scope="col">Renda</th>
-					<th scope="col">Ações</th>
+					<th scope="col" class="text-center">Cpf</th>
+					<th scope="col" class="text-center">Idade</th>
+					<th scope="col" class="text-center">Sexo</th>
+					<th scope="col" class="text-center">Estado Civil</th>
+					<th scope="col" class="text-center">Status</th>
+					<th scope="col" class="text-center">Renda</th>
+					<th scope="col" class="text-center"></th>
+					<th scope="col" class="text-center">Ações</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -47,57 +48,71 @@
 					<td *ngIf="cliente === editCliente">
 						<input [(ngModel)]="editCliente.nome" (blur)="update()" (keyup.enter)="update()" class="form-control" />
 					</td>
-					<td *ngIf="cliente !== editCliente">
+					<td *ngIf="cliente !== editCliente" class="text-center">
 						{{cliente.cpf}}
 					</td>
-					<td *ngIf="cliente === editCliente">
+					<td *ngIf="cliente === editCliente" class="text-center">
 						<input [(ngModel)]="editCliente.cpf" (blur)="update()" (keyup.enter)="update()" class="form-control" type="text" />
 					</td>
-					<td *ngIf="cliente !== editCliente">
+					<td *ngIf="cliente !== editCliente" class="text-center">
 						{{cliente.idade}}
 					</td>
-					<td *ngIf="cliente === editCliente">
+					<td *ngIf="cliente === editCliente" class="text-center">
 						<input [(ngModel)]="editCliente.idade" (blur)="update()" (keyup.enter)="update()" class="form-control" type="number" />
 					</td>
-					<td *ngIf="cliente !== editCliente">
+					<td *ngIf="cliente !== editCliente" class="text-center">
 						{{cliente.sexo}}
 					</td>
-					<td *ngIf="cliente === editCliente">
+					<td *ngIf="cliente === editCliente" class="text-center">
 						<select [(ngModel)]="editCliente.sexo" (blur)="update()" (keyup.enter)="update()" class="form-control">
 							<option *ngFor="let sexo of listaSexo" [ngValue]="sexo.id">{{sexo.descricao}}</option>
 						</select>
 					</td>
-					<td *ngIf="cliente !== editCliente">
+					<td *ngIf="cliente !== editCliente" class="text-center">
 						{{cliente.estadoCivil}}
 					</td>
-					<td *ngIf="cliente === editCliente">
+					<td *ngIf="cliente === editCliente" class="text-center">
 						<select [(ngModel)]="editCliente.estadoCivil" (blur)="update()" (keyup.enter)="update()" class="form-control">
 							<option *ngFor="let estadoCivil of listaEstadoCivil" [ngValue]="estadoCivil.id">{{estadoCivil.descricao}}</option>
 						</select>
 					</td>
-					<td *ngIf="cliente !== editCliente">
+					<td *ngIf="cliente !== editCliente" class="text-center">
 						{{cliente.status}}
 					</td>
-					<td *ngIf="cliente === editCliente">
+					<td *ngIf="cliente === editCliente" class="text-center">
 						<select [(ngModel)]="editCliente.status" (blur)="update()" (keyup.enter)="update()" class="form-control">
 							<option *ngFor="let status of listaStatus" [ngValue]="status.id">{{status.descricao}}</option>
 						</select>
 					</td>
-					<td *ngIf="cliente !== editCliente">
+					<td *ngIf="cliente !== editCliente" class="text-center">
 						{{cliente.renda}}
 					</td>
-					<td *ngIf="cliente === editCliente">
+					<td *ngIf="cliente === editCliente" class="text-center">
 						<input [(ngModel)]="editCliente.renda" (blur)="update()" (keyup.enter)="update()" class="form-control" type="number" />
 					</td>
-					<td>
-						<button title="Delete Cliente" (click)="cancel()" class="btn btn-danger ml-1" *ngIf="cliente.id === undefined">
-							Cancelar
+					<td class="text-center">
+						<button title="Endereço" (click)="abrirEndereco(cliente, enderecomodal)" class="btn btn-secondary ml-1 btn-sm" *ngIf="cliente.id !== undefined && cliente !== editCliente" data-toggle="modal" data-target="#enderecosModal">
+							<i class="fa fa-home"></i>
 						</button>
-						<button title="Edit Cliente" (click)="edit(cliente)" class="btn btn-primary" *ngIf="cliente.id !== undefined"> 
-							Editar
+						<button title="Dependentes" (click)="abrirDependente(cliente, dependentemodal)" class="btn btn-secondary ml-1 btn-sm" *ngIf="cliente.id !== undefined && cliente !== editCliente">
+							<i class="fa fa-child"></i>
 						</button>
-						<button title="Delete Cliente" (click)="delete(cliente)" class="btn btn-danger ml-1" *ngIf="cliente.id !== undefined">
-							Deletar
+					</td>
+					<td class="text-center">
+						<button title="Análise de Crédito" (click)="delete(cliente)" class="btn btn-success ml-1 btn-sm" *ngIf="cliente.id !== undefined && cliente !== editCliente">
+							<i class="fa fa-credit-card"></i>
+						</button>
+						<button title="Cancelar Novo" (click)="cancel()" class="btn btn-danger ml-1 btn-sm" *ngIf="cliente.id === undefined">
+							<i class="fa fa-ban"></i>
+						</button>
+						<button title="Cancelar Edit" (click)="cancelEdit()" class="btn btn-danger ml-1 btn-sm" *ngIf="cliente.id !== undefined && cliente === editCliente">
+							<i class="fa fa-ban"></i>
+						</button>
+						<button title="Editar Cliente" (click)="edit(cliente)" class="btn btn-primary ml-1 btn-sm" *ngIf="cliente.id !== undefined && cliente !== editCliente"> 
+							<i class="fa fa-pencil"></i>
+						</button>
+						<button title="Deletar Cliente" (click)="delete(cliente)" class="btn btn-danger ml-1 btn-sm" *ngIf="cliente.id !== undefined && cliente !== editCliente">
+							<i class="fa fa-trash"></i>
 						</button>
 					</td>
 				</tr>
@@ -105,3 +120,298 @@
 		</table>
 	</div>
 </div>
+
+<ng-template #enderecomodal let-modal>	
+			<div class="modal-header">
+				<h5 class="modal-title">Endereço</h5>
+				<button type="button" class="close" aria-label="Close" (click)="cancelEndereco(modal)">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<form *ngIf="endereco !== undefined || enderecoEdit !== undefined">
+					<div class="form-group row">
+						<label for="cliente" class="col-sm-2 col-form-label">Cliente</label>
+						<div class="col-sm-8" *ngIf="enderecoEdit !== undefined">
+							<input type="text" readonly class="form-control-plaintext" id="cliente" value="{{ enderecoEdit.cliente.nome }}">
+						</div>
+						<div class="col-sm-8" *ngIf="enderecoEdit === undefined">
+							<input type="text" readonly class="form-control-plaintext" id="cliente" value="{{ endereco.cliente.nome }}">
+						</div>
+						<div class="col-sm-1">
+							<button title="Editar Endereco" (click)="editEndereco(endereco)" class="btn btn-danger ml-1 btn-sm" *ngIf="enderecoEdit === undefined">
+								<i class="fa fa-pencil"></i>
+							</button>
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="cep" class="col-sm-2 col-form-label">Cep</label>
+						<div class="col-sm-4" *ngIf="enderecoEdit !== undefined">
+							<input type="text" class="form-control" id="cep" placeholder="00000-000" [(ngModel)]="enderecoEdit.cep" [ngModelOptions]="{standalone: true}">
+						</div>
+						<div class="col-sm-4" *ngIf="enderecoEdit === undefined">
+							<input type="text" readonly class="form-control-plaintext" id="cep" [(ngModel)]="endereco.cep" [ngModelOptions]="{standalone: true}">
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="rua" class="col-sm-2 col-form-label">Rua</label>
+						<div class="col-sm-4" *ngIf="enderecoEdit !== undefined">
+							<input type="text" class="form-control" id="rua" [(ngModel)]="enderecoEdit.rua" [ngModelOptions]="{standalone: true}">
+						</div>
+						<div class="col-sm-4" *ngIf="enderecoEdit === undefined">
+							<input type="text" readonly class="form-control-plaintext" id="rua" [(ngModel)]="endereco.rua" [ngModelOptions]="{standalone: true}">
+						</div>
+						<label for="numero" class="col-sm-2 col-form-label">Nº</label>
+						<div class="col-sm-4" *ngIf="enderecoEdit !== undefined">
+							<input type="text" class="form-control" id="numero" [(ngModel)]="enderecoEdit.numero" [ngModelOptions]="{standalone: true}">
+						</div>
+						<div class="col-sm-4" *ngIf="enderecoEdit === undefined">
+							<input type="text" readonly class="form-control-plaintext" id="numero" [(ngModel)]="endereco.numero" [ngModelOptions]="{standalone: true}">
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="bairro" class="col-sm-2 col-form-label">Bairro</label>
+						<div class="col-sm-4" *ngIf="enderecoEdit !== undefined">
+							<input type="text" class="form-control" id="bairro" [(ngModel)]="enderecoEdit.bairro" [ngModelOptions]="{standalone: true}">
+						</div>
+						<div class="col-sm-4" *ngIf="enderecoEdit === undefined">
+							<input type="text" readonly class="form-control-plaintext" id="bairro" [(ngModel)]="endereco.bairro" [ngModelOptions]="{standalone: true}">
+						</div>
+						<label for="cidade" class="col-sm-2 col-form-label">Cidade</label>
+						<div class="col-sm-4" *ngIf="enderecoEdit !== undefined">
+							<select [(ngModel)]="enderecoEdit.cidade" class="form-control" [ngModelOptions]="{standalone: true}">
+								<option *ngFor="let cidade of listaCidade" [ngValue]="cidade">{{cidade.nome}}</option>
+							</select>
+						</div>
+						<div class="col-sm-4" *ngIf="enderecoEdit === undefined">
+							<input type="text" readonly class="form-control-plaintext" id="cidade" [(ngModel)]="endereco.cidade.nome" [ngModelOptions]="{standalone: true}">
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="estado" class="col-sm-2 col-form-label">Estado</label>
+						<div class="col-sm-4" *ngIf="enderecoEdit !== undefined">
+							<input type="text" class="form-control" id="estado" [(ngModel)]="enderecoEdit.estado" [ngModelOptions]="{standalone: true}">
+						</div>
+						<div class="col-sm-4" *ngIf="enderecoEdit === undefined">
+							<input type="text" readonly class="form-control-plaintext" id="estado" [(ngModel)]="endereco.estado" [ngModelOptions]="{standalone: true}">
+						</div>
+						<label for="pais" class="col-sm-2 col-form-label">País</label>
+						<div class="col-sm-4" *ngIf="enderecoEdit !== undefined">
+							<input type="text" class="form-control" id="pais" [(ngModel)]="enderecoEdit.pais" [ngModelOptions]="{standalone: true}">
+						</div>
+						<div class="col-sm-4" *ngIf="enderecoEdit === undefined">
+							<input type="text" readonly class="form-control-plaintext" id="pais" [(ngModel)]="endereco.pais" [ngModelOptions]="{standalone: true}">
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" (click)="cancelEndereco(modal)">
+					Fechar
+				</button>
+				<button type="button" class="btn btn-danger" (click)="cancelEditEndereco(modal)" *ngIf="enderecoEdit !== undefined">
+					Cancelar
+				</button>
+				<button type="button" class="btn btn-primary" (click)="saveEndereco(enderecoEdit, modal)" *ngIf="enderecoEdit !== undefined">
+					Salvar
+				</button>
+			</div>
+</ng-template>
+
+<ng-template #dependentemodal let-modal>	
+	<div class="modal-header">
+		<h5 class="modal-title">Dependentes</h5>
+		<button type="button" class="close" aria-label="Close" (click)="cancelDependente(modal)">
+			<span aria-hidden="true">&times;</span>
+		</button>
+	</div>
+	<div class="modal-body">
+		<table class="table">
+			<thead>
+				<tr>
+					<th scope="col">#</th>
+					<th scope="col">Nome</th>
+					<th scope="col" class="text-center">Cpf</th>
+					<th scope="col" class="text-center">Idade</th>
+					<th scope="col" class="text-center">Sexo</th>
+					<th scope="col" class="text-center">Estado Civil</th>
+					<th scope="col" class="text-center">Status</th>
+					<th scope="col" class="text-center">Ações</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngFor="let dependente of dependentes">
+					<th scope="row">
+						{{ dependente.id || 0 }}
+					</th>
+					<td *ngIf="dependente !== dependenteEdit">
+						{{dependente.nome}}
+					</td>
+					<td *ngIf="dependente === dependenteEdit">
+						<input [(ngModel)]="dependenteEdit.nome" (blur)="updateDependente()" (keyup.enter)="updateDependente()" class="form-control" />
+					</td>
+					<td *ngIf="dependente !== dependenteEdit" class="text-center">
+						{{dependente.cpf}}
+					</td>
+					<td *ngIf="dependente === dependenteEdit" class="text-center">
+						<input [(ngModel)]="dependenteEdit.cpf" (blur)="updateDependente()" (keyup.enter)="updateDependente()" class="form-control" type="text" />
+					</td>
+					<td *ngIf="dependente !== dependenteEdit" class="text-center">
+						{{dependente.idade}}
+					</td>
+					<td *ngIf="dependente === dependenteEdit" class="text-center">
+						<input [(ngModel)]="dependenteEdit.idade" (blur)="updateDependente()" (keyup.enter)="updateDependente()" class="form-control" type="number" />
+					</td>
+					<td *ngIf="dependente !== dependenteEdit" class="text-center">
+						{{dependente.sexo}}
+					</td>
+					<td *ngIf="dependente === dependenteEdit" class="text-center">
+						<select [(ngModel)]="dependenteEdit.sexo" (blur)="updateDependente()" (keyup.enter)="updateDependente()" class="form-control">
+							<option *ngFor="let sexo of listaSexo" [ngValue]="sexo.id">{{sexo.descricao}}</option>
+						</select>
+					</td>
+					<td *ngIf="dependente !== dependenteEdit" class="text-center">
+						{{dependente.estadoCivil}}
+					</td>
+					<td *ngIf="dependente === dependenteEdit" class="text-center">
+						<select [(ngModel)]="dependenteEdit.estadoCivil" (blur)="updateDependente()" (keyup.enter)="updateDependente()" class="form-control">
+							<option *ngFor="let estadoCivil of listaEstadoCivil" [ngValue]="estadoCivil.id">{{estadoCivil.descricao}}</option>
+						</select>
+					</td>
+					<td *ngIf="dependente !== dependenteEdit" class="text-center">
+						{{dependente.status}}
+					</td>
+					<td *ngIf="dependente === dependenteEdit" class="text-center">
+						<select [(ngModel)]="dependenteEdit.status" (blur)="updateDependente()" (keyup.enter)="updateDependente()" class="form-control">
+							<option *ngFor="let status of listaStatus" [ngValue]="status.id">{{status.descricao}}</option>
+						</select>
+					</td>
+					<td class="text-center">
+						<button title="Cancelar Novo" (click)="cancelNovoDependente()" class="btn btn-danger ml-1 btn-sm" *ngIf="dependente.id === undefined">
+							<i class="fa fa-ban"></i>
+						</button>
+						<button title="Cancelar Edit" (click)="cancelEditDependente()" class="btn btn-danger ml-1 btn-sm" *ngIf="dependente.id !== undefined && dependente === dependenteEdit">
+							<i class="fa fa-ban"></i>
+						</button>
+						<button title="Editar Dependente" (click)="editDependente(dependente)" class="btn btn-primary ml-1 btn-sm" *ngIf="dependente.id !== undefined && dependente !== dependenteEdit"> 
+							<i class="fa fa-pencil"></i>
+						</button>
+						<button title="Deletar Dependente" (click)="deleteDependente(dependente)" class="btn btn-danger ml-1 btn-sm" *ngIf="dependente.id !== undefined && dependente !== dependenteEdit">
+							<i class="fa fa-trash"></i>
+						</button>
+					</td>
+				</tr>
+			</tbody>
+		</table>		
+	</div>
+	<div class="modal-footer">
+		<button type="button" class="btn btn-secondary" (click)="cancelDependente(modal)">
+			Fechar
+		</button>
+		<button type="button" class="btn btn-primary" (click)="novoDependente()" *ngIf="dependenteEdit === undefined">
+			Novo
+		</button>
+		<button type="button" class="btn btn-primary" (click)="saveDependente(dependenteEdit, modal)" *ngIf="dependenteEdit !== undefined">
+			Salvar
+		</button>
+	</div>
+</ng-template>
+
+<ng-template #creditomodal let-modal>	
+	<div class="modal-header">
+		<h5 class="modal-title">Análise de Crédito</h5>
+		<button type="button" class="close" aria-label="Close" (click)="cancelDependente(modal)">
+			<span aria-hidden="true">&times;</span>
+		</button>
+	</div>
+	<div class="modal-body">
+		<table class="table">
+			<thead>
+				<tr>
+					<th scope="col">#</th>
+					<th scope="col">Nome</th>
+					<th scope="col" class="text-center">Cpf</th>
+					<th scope="col" class="text-center">Idade</th>
+					<th scope="col" class="text-center">Sexo</th>
+					<th scope="col" class="text-center">Estado Civil</th>
+					<th scope="col" class="text-center">Status</th>
+					<th scope="col" class="text-center">Ações</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngFor="let dependente of dependentes">
+					<th scope="row">
+						{{ dependente.id || 0 }}
+					</th>
+					<td *ngIf="dependente !== dependenteEdit">
+						{{dependente.nome}}
+					</td>
+					<td *ngIf="dependente === dependenteEdit">
+						<input [(ngModel)]="dependenteEdit.nome" (blur)="updateDependente()" (keyup.enter)="updateDependente()" class="form-control" />
+					</td>
+					<td *ngIf="dependente !== dependenteEdit" class="text-center">
+						{{dependente.cpf}}
+					</td>
+					<td *ngIf="dependente === dependenteEdit" class="text-center">
+						<input [(ngModel)]="dependenteEdit.cpf" (blur)="updateDependente()" (keyup.enter)="updateDependente()" class="form-control" type="text" />
+					</td>
+					<td *ngIf="dependente !== dependenteEdit" class="text-center">
+						{{dependente.idade}}
+					</td>
+					<td *ngIf="dependente === dependenteEdit" class="text-center">
+						<input [(ngModel)]="dependenteEdit.idade" (blur)="updateDependente()" (keyup.enter)="updateDependente()" class="form-control" type="number" />
+					</td>
+					<td *ngIf="dependente !== dependenteEdit" class="text-center">
+						{{dependente.sexo}}
+					</td>
+					<td *ngIf="dependente === dependenteEdit" class="text-center">
+						<select [(ngModel)]="dependenteEdit.sexo" (blur)="updateDependente()" (keyup.enter)="updateDependente()" class="form-control">
+							<option *ngFor="let sexo of listaSexo" [ngValue]="sexo.id">{{sexo.descricao}}</option>
+						</select>
+					</td>
+					<td *ngIf="dependente !== dependenteEdit" class="text-center">
+						{{dependente.estadoCivil}}
+					</td>
+					<td *ngIf="dependente === dependenteEdit" class="text-center">
+						<select [(ngModel)]="dependenteEdit.estadoCivil" (blur)="updateDependente()" (keyup.enter)="updateDependente()" class="form-control">
+							<option *ngFor="let estadoCivil of listaEstadoCivil" [ngValue]="estadoCivil.id">{{estadoCivil.descricao}}</option>
+						</select>
+					</td>
+					<td *ngIf="dependente !== dependenteEdit" class="text-center">
+						{{dependente.status}}
+					</td>
+					<td *ngIf="dependente === dependenteEdit" class="text-center">
+						<select [(ngModel)]="dependenteEdit.status" (blur)="updateDependente()" (keyup.enter)="updateDependente()" class="form-control">
+							<option *ngFor="let status of listaStatus" [ngValue]="status.id">{{status.descricao}}</option>
+						</select>
+					</td>
+					<td class="text-center">
+						<button title="Cancelar Novo" (click)="cancelNovoDependente()" class="btn btn-danger ml-1 btn-sm" *ngIf="dependente.id === undefined">
+							<i class="fa fa-ban"></i>
+						</button>
+						<button title="Cancelar Edit" (click)="cancelEditDependente()" class="btn btn-danger ml-1 btn-sm" *ngIf="dependente.id !== undefined && dependente === dependenteEdit">
+							<i class="fa fa-ban"></i>
+						</button>
+						<button title="Editar Dependente" (click)="editDependente(dependente)" class="btn btn-primary ml-1 btn-sm" *ngIf="dependente.id !== undefined && dependente !== dependenteEdit"> 
+							<i class="fa fa-pencil"></i>
+						</button>
+						<button title="Deletar Dependente" (click)="deleteDependente(dependente)" class="btn btn-danger ml-1 btn-sm" *ngIf="dependente.id !== undefined && dependente !== dependenteEdit">
+							<i class="fa fa-trash"></i>
+						</button>
+					</td>
+				</tr>
+			</tbody>
+		</table>		
+	</div>
+	<div class="modal-footer">
+		<button type="button" class="btn btn-secondary" (click)="cancelDependente(modal)">
+			Fechar
+		</button>
+		<button type="button" class="btn btn-primary" (click)="novoDependente()" *ngIf="dependenteEdit === undefined">
+			Novo
+		</button>
+		<button type="button" class="btn btn-primary" (click)="saveDependente(dependenteEdit, modal)" *ngIf="dependenteEdit !== undefined">
+			Salvar
+		</button>
+	</div>
+</ng-template>

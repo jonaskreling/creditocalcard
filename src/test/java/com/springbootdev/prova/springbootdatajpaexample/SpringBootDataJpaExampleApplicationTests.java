@@ -1,4 +1,4 @@
-package com.springbootdev.examples.springbootdatajpaexample;
+package com.springbootdev.prova.springbootdatajpaexample;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

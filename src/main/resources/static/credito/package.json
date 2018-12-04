@@ -3,12 +3,11 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --proxy-config proxy.config.js",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e",
-    "start": "ng serve --proxy-config proxy.config.js"
+    "e2e": "ng e2e"
   },
   "private": true,
   "dependencies": {
@@ -20,11 +19,13 @@
     "@angular/platform-browser": "~7.1.0",
     "@angular/platform-browser-dynamic": "~7.1.0",
     "@angular/router": "~7.1.0",
+    "@ng-bootstrap/ng-bootstrap": "^4.0.0",
     "angular-animate": "^1.7.5",
     "angular-touch": "^1.7.5",
     "bootstrap": "^4.1.3",
     "bootstrap-css": "^4.0.0-alpha.5",
     "core-js": "^2.5.4",
+    "font-awesome": "^4.7.0",
     "jquery": "^3.3.1",
     "popper.js": "^1.14.3",
     "rxjs": "~6.3.3",

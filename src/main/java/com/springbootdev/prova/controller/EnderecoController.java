@@ -1,4 +1,4 @@
-package com.springbootdev.examples.controller;
+package com.springbootdev.prova.controller;
 
 import java.util.List;
 
@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.springbootdev.examples.entity.Endereco;
-import com.springbootdev.examples.repository.EnderecoRepository;
+import com.springbootdev.prova.entity.Endereco;
+import com.springbootdev.prova.repository.EnderecoRepository;
 
 @RestController
 @RequestMapping("/api")
@@ -33,7 +33,7 @@ public class EnderecoController {
     @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/enderecos")
     public List<Endereco> findAll(){
-        return enderecoRepository.findAll();
+    	return enderecoRepository.findAll();
     }
 
     @CrossOrigin(origins = "http://localhost:4200")

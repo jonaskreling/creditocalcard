@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
 import { Endereco } from './endereco';
+import { Cliente } from '../cliente/cliente';
 import { HttpErrorHandler, HandleError } from '../http-error-handler.service';
 
 const httpOptions = {
@@ -31,11 +32,9 @@ export class EnderecoService {
       );
   }
 
-  searchEnderecos(term: string): Observable<Endereco[]> {
-    term = term.trim();
-
-    const options = term ?
-     { params: new HttpParams().set('nome', term) } : {};
+  searchEnderecos(cliente: Cliente): Observable<Endereco[]> {
+    const options = cliente ?
+     { params: new HttpParams().set('filter', JSON.stringify(cliente))} : {};
 
     return this.http.get<Endereco[]>(this.enderecosUrl)
       .pipe(

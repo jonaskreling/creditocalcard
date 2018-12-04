@@ -1,4 +1,4 @@
-package com.springbootdev.examples.entity;
+package com.springbootdev.prova.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,8 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.springbootdev.examples.enumeration.Estado;
-import com.springbootdev.examples.enumeration.Pais;
+import com.springbootdev.prova.enumeration.Estado;
+import com.springbootdev.prova.enumeration.Pais;
 
 /**
  * Table: Endereco

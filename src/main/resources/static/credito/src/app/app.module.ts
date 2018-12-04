@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { DatePipe } from '@angular/common';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { HttpErrorHandler } from './http-error-handler.service';
 import { MessageService } from './message.service';
@@ -35,7 +36,8 @@ import { FooterComponent } from './footer/footer.component';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgbModule
   ],
   providers: [
   	HttpErrorHandler,

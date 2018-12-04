@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
 import { Dependente } from './dependente';
+import { Cliente } from '../cliente/cliente';
 import { HttpErrorHandler, HandleError } from '../http-error-handler.service';
 
 const httpOptions = {
@@ -31,11 +32,9 @@ export class DependenteService {
       );
   }
 
-  searchDependentes(term: string): Observable<Dependente[]> {
-    term = term.trim();
-
-    const options = term ?
-     { params: new HttpParams().set('nome', term) } : {};
+  searchDependentes(cliente: Cliente): Observable<Dependente[]> {
+    const options = cliente ?
+     { params: new HttpParams().set('filter', JSON.stringify(cliente)) } : {};
 
     return this.http.get<Dependente[]>(this.dependentesUrl)
       .pipe(

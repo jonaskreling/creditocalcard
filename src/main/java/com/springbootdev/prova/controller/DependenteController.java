@@ -1,4 +1,4 @@
-package com.springbootdev.examples.controller;
+package com.springbootdev.prova.controller;
 
 import java.util.List;
 
@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.springbootdev.examples.entity.Dependente;
-import com.springbootdev.examples.repository.DependenteRepository;
+import com.springbootdev.prova.entity.Dependente;
+import com.springbootdev.prova.repository.DependenteRepository;
 
 @RestController
 @RequestMapping("/api")

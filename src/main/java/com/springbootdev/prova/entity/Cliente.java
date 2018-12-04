@@ -1,4 +1,4 @@
-package com.springbootdev.examples.entity;
+package com.springbootdev.prova.entity;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -16,9 +16,9 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.springbootdev.examples.enumeration.EstadoCivil;
-import com.springbootdev.examples.enumeration.Sexo;
-import com.springbootdev.examples.enumeration.Status;
+import com.springbootdev.prova.enumeration.EstadoCivil;
+import com.springbootdev.prova.enumeration.Sexo;
+import com.springbootdev.prova.enumeration.Status;
 
 /**
  * Table: cliente
@@ -55,6 +55,10 @@ public class Cliente {
     @JsonIgnore
     @OneToMany(mappedBy = "cliente")
     private List<Dependente> dependentes;
+    
+    @JsonIgnore
+    @OneToMany(mappedBy = "credito")
+    private List<Credito> creditos;
     
     @Column(nullable = false)
     private BigDecimal renda;
@@ -153,6 +157,14 @@ public class Cliente {
 
 	public void setDateCreate(Date dateCreate) {
 		this.dateCreate = dateCreate;
+	}
+
+	public List<Credito> getCreditos() {
+		return creditos;
+	}
+
+	public void setCreditos(List<Credito> creditos) {
+		this.creditos = creditos;
 	}
 
 	@Override

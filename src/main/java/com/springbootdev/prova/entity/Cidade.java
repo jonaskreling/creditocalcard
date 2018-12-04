@@ -1,4 +1,4 @@
-package com.springbootdev.examples.entity;
+package com.springbootdev.prova.entity;
 
 import java.util.List;
 

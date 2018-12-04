@@ -1,5 +1,6 @@
-package com.springbootdev.examples.entity;
+package com.springbootdev.prova.entity;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -14,93 +15,37 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.springbootdev.examples.enumeration.EstadoCivil;
-import com.springbootdev.examples.enumeration.Sexo;
-import com.springbootdev.examples.enumeration.Status;
+import com.springbootdev.prova.enumeration.Status;
 
 @Entity
-@Table(name = "dependente")
-public class Dependente {
+@Table(name = "credito")
+public class Credito {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(nullable = false)
-    private String nome;
-
-    @Column(nullable = false, length = 11, unique = true)
-    private String cpf;
-    
-    @Column(nullable = false)
-    private Long idade;
-    
-    @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
-    private Sexo sexo;
-    
-    @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
-    private EstadoCivil estadoCivil;
-    
     @ManyToOne
     @JoinColumn(name="cliente_id")
     private Cliente cliente;
     
-    @Column(nullable = false)
+    @Column(nullable = true)
     @Enumerated(EnumType.STRING)
     private Status status;
+    
+    @Column(nullable = true)
+    private BigDecimal limite;
     
     @Column(nullable = false)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm:ss")
     private Date dateCreate;
-    
+
 	public Long getId() {
 		return id;
 	}
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	public String getCpf() {
-		return cpf;
-	}
-
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
-	}
-
-	public Long getIdade() {
-		return idade;
-	}
-
-	public void setIdade(Long idade) {
-		this.idade = idade;
-	}
-
-	public Sexo getSexo() {
-		return sexo;
-	}
-
-	public void setSexo(Sexo sexo) {
-		this.sexo = sexo;
-	}
-
-	public EstadoCivil getEstadoCivil() {
-		return estadoCivil;
-	}
-
-	public void setEstadoCivil(EstadoCivil estadoCivil) {
-		this.estadoCivil = estadoCivil;
 	}
 
 	public Cliente getCliente() {
@@ -117,6 +62,14 @@ public class Dependente {
 
 	public void setStatus(Status status) {
 		this.status = status;
+	}
+
+	public BigDecimal getLimite() {
+		return limite;
+	}
+
+	public void setLimite(BigDecimal limite) {
+		this.limite = limite;
 	}
 
 	public Date getDateCreate() {
@@ -143,10 +96,10 @@ public class Dependente {
 		if (obj == null) {
 			return false;
 		}
-		if (!(obj instanceof Dependente)) {
+		if (!(obj instanceof Credito)) {
 			return false;
 		}
-		Dependente other = (Dependente) obj;
+		Credito other = (Credito) obj;
 		if (id == null) {
 			if (other.id != null) {
 				return false;

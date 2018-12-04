@@ -1,11 +1,18 @@
-package com.springbootdev.examples.controller;
+package com.springbootdev.prova.controller;
 
-import org.springframework.stereotype.Controller;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+import com.springbootdev.prova.repository.ClienteRepository;
+
+@RestController
+@RequestMapping("/api")
 public class CreditoController {
+	
+	@Autowired
+    private ClienteRepository clienteRepository;
 
 	@CrossOrigin(origins = "http://localhost:4200")
 	@RequestMapping("/")

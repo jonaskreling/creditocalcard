@@ -1,7 +1,8 @@
-package com.springbootdev.examples.controller;
+package com.springbootdev.prova.controller;
 
-import com.springbootdev.examples.entity.Cliente;
-import com.springbootdev.examples.repository.ClienteRepository;
+import com.springbootdev.prova.entity.Cliente;
+import com.springbootdev.prova.repository.ClienteRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

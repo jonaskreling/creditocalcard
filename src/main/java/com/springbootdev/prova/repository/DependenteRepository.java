@@ -1,7 +1,8 @@
-package com.springbootdev.examples.repository;
+package com.springbootdev.prova.repository;
 
-import com.springbootdev.examples.entity.Dependente;
 import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.springbootdev.prova.entity.Dependente;
 
 public interface DependenteRepository extends JpaRepository<Dependente, Long>
 {
