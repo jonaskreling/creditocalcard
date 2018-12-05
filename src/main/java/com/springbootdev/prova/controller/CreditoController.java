@@ -34,7 +34,7 @@ public class CreditoController {
 	@Autowired
     private ClienteRepository clienteRepository;
 
-	@CrossOrigin(origins = "http://localhost:4200")
+	@CrossOrigin(origins = "http://localhost:8087")
     @PostMapping("/creditos")
     public Credito create(@RequestBody Credito credito){
 		credito.setCliente(clienteRepository.findOne(credito.getCliente().getId()));
@@ -42,7 +42,7 @@ public class CreditoController {
         return creditoRepository.save(credito);
     }
 	
-	@CrossOrigin(origins = "http://localhost:4200")
+	@CrossOrigin(origins = "http://localhost:8087")
     @GetMapping("/creditos")
     public List<Credito> findAll(){
         return creditoRepository.findAll().stream()

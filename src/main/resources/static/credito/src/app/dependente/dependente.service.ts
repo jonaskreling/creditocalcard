@@ -18,7 +18,7 @@ const httpOptions = {
 
 @Injectable()
 export class DependenteService {
-  dependentesUrl = 'http://localhost:8080/api/dependentes';
+  dependentesUrl = 'http://localhost:8087/api/dependentes';
   private handleError: HandleError;
 
   constructor(private http: HttpClient, httpErrorHandler: HttpErrorHandler){

@@ -18,7 +18,7 @@ const httpOptions = {
 
 @Injectable()
 export class EnderecoService {
-  enderecosUrl = 'http://localhost:8080/api/enderecos';
+  enderecosUrl = 'http://localhost:8087/api/enderecos';
   private handleError: HandleError;
 
   constructor(private http: HttpClient, httpErrorHandler: HttpErrorHandler){

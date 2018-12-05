@@ -17,7 +17,7 @@ const httpOptions = {
 
 @Injectable()
 export class CidadeService {
-  cidadesUrl = 'http://localhost:8080/api/cidades';
+  cidadesUrl = 'http://localhost:8087/api/cidades';
   private handleError: HandleError;
 
   constructor(private http: HttpClient, httpErrorHandler: HttpErrorHandler){

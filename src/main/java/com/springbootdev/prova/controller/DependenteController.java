@@ -24,19 +24,19 @@ public class DependenteController {
     @Autowired
     private DependenteRepository dependenteRepository;
 
-    @CrossOrigin(origins = "http://localhost:4200")
+    @CrossOrigin(origins = "http://localhost:8087")
     @PostMapping("/dependentes")
     public Dependente create(@RequestBody Dependente dependente){
         return dependenteRepository.save(dependente);
     }
 
-    @CrossOrigin(origins = "http://localhost:4200")
+    @CrossOrigin(origins = "http://localhost:8087")
     @GetMapping("/dependentes")
     public List<Dependente> findAll(){
         return dependenteRepository.findAll();
     }
 
-    @CrossOrigin(origins = "http://localhost:4200")
+    @CrossOrigin(origins = "http://localhost:8087")
     @PutMapping("/dependentes/{dependente_id}")
     public Dependente update(@PathVariable("dependente_id") Long dependenteId, @RequestBody Dependente dependenteObject){
     	Dependente dependente = dependenteRepository.findOne(dependenteId);
@@ -50,14 +50,14 @@ public class DependenteController {
     	return dependenteRepository.save(dependente);
     }
 
-    @CrossOrigin(origins = "http://localhost:4200")
+    @CrossOrigin(origins = "http://localhost:8087")
     @DeleteMapping("/dependentes/{dependente_id}")
     public List<Dependente> delete(@PathVariable("dependente_id") Long dependenteId){
     	dependenteRepository.delete(dependenteId);
         return dependenteRepository.findAll();
     }
 
-    @CrossOrigin(origins = "http://localhost:4200")
+    @CrossOrigin(origins = "http://localhost:8087")
     @GetMapping("/dependentes/{dependente_id}")
     @ResponseBody
     public Dependente findByDependenteId(@PathVariable("dependente_id") Long dependenteId){

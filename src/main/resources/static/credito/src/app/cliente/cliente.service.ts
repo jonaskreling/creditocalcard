@@ -17,7 +17,7 @@ const httpOptions = {
 
 @Injectable()
 export class ClienteService {
-  clientesUrl = 'http://localhost:8080/api/clientes';
+  clientesUrl = 'http://localhost:8087/api/clientes';
   private handleError: HandleError;
 
   constructor(private http: HttpClient, httpErrorHandler: HttpErrorHandler){
