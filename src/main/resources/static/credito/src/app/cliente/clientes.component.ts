@@ -36,6 +36,8 @@ export class ClientesComponent implements OnInit {
 	listaStatus: Array<Object> = [{id: 'ATIVO', descricao: 'Ativo'}, {id: 'INATIVO', descricao: 'Inativo'}];
 	listaSexo: Array<Object> = [{id: 'MASCULINO', descricao: 'Masculino'}, {id: 'FEMININO', descricao: 'Feminino'}];
 	listaEstadoCivil: Array<Object> = [{id: 'CASADO', descricao: 'Casado'}, {id: 'SOLTEIRO', descricao: 'Solteiro'}, {id: 'DIVORCIADO', descricao: 'Divorciado'}, {id: 'VIUVO', descricao: 'Viúvo'}];
+	listaEstado = ['AC', 'AL', 'AP', 'AM', 'BA', 'CE', 'DF', 'ES', 'GO', 'MA', 'MT', 'MS', 'MG', 'PA', 'PB', 'PR', 'PE', 'PI', 'RJ', 'RN', 'RS', 'RO', 'RR', 'SC', 'SP', 'SE', 'TO'];
+	listaPais = ['BR'];
 	listaCidade: Cidade[];
 
 	constructor(private clienteService: ClienteService, 
