@@ -43,10 +43,20 @@ Para rodar o projeto
 
 1. Clone este projeto
 2. Com o CMD abra a pasta do projeto
-3. Execute mvn clean install -DskipTests
-4. Execute docker-compose build
-5. Execute docker-compose up
-6. Execute um browser e acesse o seguinte endereço http://localhost:8087/
+3. Execute 'docker run -d --name mysql-docker-container -e MYSQL_ROOT_PASSWORD=Coraldavilma001 -e MYSQL_DATABASE=spring_boot_db -e MYSQL_USER=app -e MYSQL_PASSWORD=root mysql:5.7'
+4. Execute 'mvn clean install -DskipTests'
+5. Execute 'docker build -f Dockerfile -t spring-jpa-app .'
+6. Execute 'docker run -t --name spring-jpa-app-container --link mysql-docker-container:mysql -p 8087:8080 spring-jpa-app'
+7. Execute um browser e acesse o seguinte endereço 'http://localhost:8087/'
+
+OU
+
+1. Clone este projeto
+2. Com o CMD abra a pasta do projeto
+3. Execute 'mvn clean install -DskipTests'
+4. Execute 'docker-compose build'
+5. Execute 'docker-compose up'
+6. Execute um browser e acesse o seguinte endereço 'http://localhost:8087/'
 
 Pré-requisitos
 
@@ -60,3 +70,6 @@ Pré-requisitos
 A documentação foi feita seguindo o formato swager
 
 1. Acessar o arquivo swagger.yaml
+2. Abrir o arquivo em um processador swager
+
+---

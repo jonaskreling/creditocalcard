@@ -190,21 +190,21 @@
 					<div class="form-group row">
 						<label for="estado" class="col-sm-2 col-form-label">Estado</label>
 						<div class="col-sm-4" *ngIf="enderecoEdit !== undefined">
-							<input type="text" class="form-control" id="estado" [(ngModel)]="enderecoEdit.estado" [ngModelOptions]="{standalone: true}">
+							<select [(ngModel)]="enderecoEdit.estado" class="form-control" [ngModelOptions]="{standalone: true}">
+								<option *ngFor="let estado of listaEstado" [ngValue]="estado.id">{{estado.id}}</option>
+							</select>
 						</div>
 						<div class="col-sm-4" *ngIf="enderecoEdit === undefined">
-							<select [(ngModel)]="enderecoEdit.estado" class="form-control" [ngModelOptions]="{standalone: true}">
-								<option *ngFor="let estado of listaEstado" [ngValue]="estado">{{estado}}</option>
-							</select>
+							<input type="text" readonly class="form-control-plaintext" id="estado" [(ngModel)]="enderecoEdit.estado" [ngModelOptions]="{standalone: true}">
 						</div>
 						<label for="pais" class="col-sm-2 col-form-label">País</label>
 						<div class="col-sm-4" *ngIf="enderecoEdit !== undefined">
-							<input type="text" class="form-control" id="pais" [(ngModel)]="enderecoEdit.pais" [ngModelOptions]="{standalone: true}">
+							<select [(ngModel)]="enderecoEdit.pais" class="form-control" [ngModelOptions]="{standalone: true}">
+								<option *ngFor="let pais of listaPais" [ngValue]="pais.id">{{pais.id}}</option>
+							</select>
 						</div>
 						<div class="col-sm-4" *ngIf="enderecoEdit === undefined">
-							<select [(ngModel)]="enderecoEdit.pais" class="form-control" [ngModelOptions]="{standalone: true}">
-								<option *ngFor="let pais of listaPais" [ngValue]="pais">{{pais}}</option>
-							</select>
+							<input type="text" readonly class="form-control-plaintext" id="pais" [(ngModel)]="enderecoEdit.pais" [ngModelOptions]="{standalone: true}">
 						</div>
 					</div>
 				</form>
